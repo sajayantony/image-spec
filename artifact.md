@@ -1,0 +1,79 @@
+# OCI Artifact Manifest Specification
+
+The goal of the Artifact Manifest Specification is to define content addressable artifacts in order to store them along side container images in a registry. Like [OCI Images](manifest.md), OCI Artifacts may be referenced by hash of their manifests. Unlike OCI Images, OCI Artifacts are not meant to be used by any container runtime.
+
+Examples of artifacts that may be stored along with container images are Software Bill of Materials (SBOM), Digital Signatures, Provenance data, Supply Chain Attestations, scan results, and Helm charts.
+
+This section defines the `application/vnd.oci.artifact.manifest.v1+json` [media type](media-types.md).
+For the media type(s) that this is compatible with see the [matrix](media-types.md#compatibility-matrix).
+
+# Artifact Manifest
+
+## *Artifact Manifest* Property Descriptions
+
+- **`schemaVersion`** *int*
+
+  This REQUIRED property specifies the image manifest schema version.
+  For this version of the specification, this MUST be `2` to ensure backward compatibility with older versions of Docker. The value of this field will not change. This field MAY be removed in a future version of the specification.
+
+- **`mediaType`** *string*
+
+  This property SHOULD be used and [remain compatible](media-types.md#compatibility-matrix) with earlier versions of this specification and with other similar external formats.
+  When used, this field MUST contain the media type `application/vnd.oci.artifact.manifest.v1+json`.
+
+- **`blobs`** *string*
+
+  This OPTIONAL property contains a list of [descriptors](descriptor.md). Each descriptor represents an artifact of any IANA mediaType. The list MAY be ordered for certain artifact types like scan results.
+
+- **`refers`** *string*
+
+  This OPTIONAL property specifies a [descriptor](descriptor.md) of a container image or another artifact. The purpose of this property is to provide a reference to the container image or artifact this artifact is related to. The "Referrers" API in the distribution specification looks for this property to list all artifacts that refer to a given artifact or container image.
+
+- **`annotations`** *string-string map*
+
+  This OPTIONAL property contains additional metadata for the artifact manifest.
+  This OPTIONAL property MUST use the [annotation rules](annotations.md#rules).
+
+  The following annotations MAY be used:
+    
+  - `org.opencontainers.artifact.type`: type of artifact (see list of supported artifact types)
+  - `org.opencontainers.artifact.description`: human readable description for the artifact
+  - `org.opencontainers.artifact.created`: creation time of the artifact
+
+  Additionally, the following annotations SHOULD be used when deploying multi-arch container images:
+ 
+  - `org.opencontainers.platform.architecture`: CPU architecture for binaries
+  - `org.opencontainers.platform.os`: operating system for binaries
+  - `org.opencontainers.platform.os.version`: operating system version for binaries
+  - `org.opencontainers.platform.variant`: variant of the CPU architecture for binaries
+
+    Also, see [Pre-Defined Annotation Keys](annotations.md#pre-defined-annotation-keys).
+
+  User defined annotations MAY be used to filter various artifact types, e.g. signature public key hash, attestation type, and SBOM schema.
+
+## Examples
+
+*Example showing an artifact manifest for an image signature:*
+```jsonc,title=Manifest&mediatype=application/vnd.oci.artifact.manifest.v1%2Bjson
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.artifact.manifest.v1+json",
+  "blobs": [
+    {
+      "mediaType": "application/vnd.dev.cosign.simplesigning.v1+json",
+      "size": 210,
+      "digest": "sha256:1119abab63e605dcc281019bad0424744178b6f61ba57378701fe7391994c999"
+    }
+  ],
+  "refers": {
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
+    "size": 7682,
+    "digest": "sha256:5b0bcabd1ed22e9fb1310cf6c2dec7cdef19f0ad69efa1f392e94a4333501270"
+  },
+  "annotations": [
+    "org.opencontainers.artifact.type": "sig",
+    "org.opencontainers.artifact.description": "cosign signature for image:tag",
+    "org.opencontainers.artifact.created": "2022-04-05T14:30Z"
+  ]
+}
+```
