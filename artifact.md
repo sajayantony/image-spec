@@ -11,15 +11,9 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
 ## *Artifact Manifest* Property Descriptions
 
-- **`schemaVersion`** *int*
-
-  This REQUIRED property specifies the image manifest schema version.
-  For this version of the specification, this MUST be `2` to ensure backward compatibility with older versions of Docker. The value of this field will not change. This field MAY be removed in a future version of the specification.
-
 - **`mediaType`** *string*
 
-  This property SHOULD be used and [remain compatible](media-types.md#compatibility-matrix) with earlier versions of this specification and with other similar external formats.
-  When used, this field MUST contain the media type `application/vnd.oci.artifact.manifest.v1+json`.
+  This property MUST be used and contain the media type `application/vnd.oci.artifact.manifest.v1+json`.
 
 - **`blobs`** *string*
 
@@ -35,13 +29,12 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   This OPTIONAL property MUST use the [annotation rules](annotations.md#rules).
 
   The following annotations MAY be used:
-    
-  - `org.opencontainers.artifact.type`: type of artifact (see list of supported artifact types)
+
   - `org.opencontainers.artifact.description`: human readable description for the artifact
   - `org.opencontainers.artifact.created`: creation time of the artifact
 
   Additionally, the following annotations SHOULD be used when deploying multi-arch container images:
- 
+
   - `org.opencontainers.platform.architecture`: CPU architecture for binaries
   - `org.opencontainers.platform.os`: operating system for binaries
   - `org.opencontainers.platform.os.version`: operating system version for binaries
@@ -54,6 +47,7 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 ## Examples
 
 *Example showing an artifact manifest for an image signature:*
+
 ```jsonc,title=Manifest&mediatype=application/vnd.oci.artifact.manifest.v1%2Bjson
 {
   "schemaVersion": 2,
@@ -71,7 +65,6 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
     "digest": "sha256:5b0bcabd1ed22e9fb1310cf6c2dec7cdef19f0ad69efa1f392e94a4333501270"
   },
   "annotations": [
-    "org.opencontainers.artifact.type": "sig",
     "org.opencontainers.artifact.description": "cosign signature for image:tag",
     "org.opencontainers.artifact.created": "2022-04-05T14:30Z"
   ]
