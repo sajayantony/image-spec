@@ -65,7 +65,7 @@ Unlike the [image index](image-index.md), which contains information about a set
 
         Entries in this field will frequently use the `+gzip` types.
 
-- **`refers`** *string*
+- **`refers`** *[descriptor](descriptor.md)*
 
     This OPTIONAL property specifies a [descriptor](descriptor.md) of another image or [artifact](artifact.md).
     Clients may use this property to take advantage of the [`referrers` API](https://github.com/oci-playground/distribution-spec/blob/pr/spec.md#endpoints), to encode a reference to a related image or artifact.
@@ -106,7 +106,7 @@ Unlike the [image index](image-index.md), which contains information about a set
       "digest": "sha256:ec4b8955958665577945c89419d1af06b5f7636b4ac3da7f12184802ad867736"
     }
   ],
-  "refers': {
+  "refers": {
     "mediaType": "application/vnd.oci.image.manifest.v1+json",
     "size": 7682,
     "digest": "sha256:5b0bcabd1ed22e9fb1310cf6c2dec7cdef19f0ad69efa1f392e94a4333501270"
