@@ -1,6 +1,6 @@
 # OCI Artifact Manifest Specification
 
-The goal of the Artifact Manifest Specification is to define content addressable artifacts in order to store them along side container images in a registry. Like [OCI Images](manifest.md), OCI Artifacts may be referenced by hash of their manifests. Unlike OCI Images, OCI Artifacts are not meant to be used by any container runtime.
+The goal of the Artifact Manifest Specification is to define content addressable artifacts in order to store them along side container images in a registry. Like [OCI Images](manifest.md), OCI Artifacts may be referenced by the hash of their manifest. Unlike OCI Images, OCI Artifacts are not meant to be used by any container runtime.
 
 Examples of artifacts that may be stored along with container images are Software Bill of Materials (SBOM), Digital Signatures, Provenance data, Supply Chain Attestations, scan results, and Helm charts.
 
