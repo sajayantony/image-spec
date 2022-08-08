@@ -44,6 +44,9 @@ type Descriptor struct {
 	//
 	// This should only be used when referring to a manifest.
 	Platform *Platform `json:"platform,omitempty"`
+
+	// ArtifactType is the IANA media type of this artifact.
+	ArtifactType string `json:"artifactType,omitempty"`
 }
 
 // Platform describes the platform which the image in the manifest runs on.

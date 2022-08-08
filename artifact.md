@@ -15,11 +15,15 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
   This property MUST be used and contain the media type `application/vnd.oci.artifact.manifest.v1+json`.
 
-- **`blobs`** *string*
+- **`artifactType`** *string*
 
-  This OPTIONAL property contains a list of [descriptors](descriptor.md). Each descriptor represents an artifact of any IANA mediaType. The list MAY be ordered for certain artifact types like scan results.
+  This REQUIRED property specifies the mediaType of the referenced content and MAY be registered with [IANA][iana].
 
-- **`refers`** *string*
+- **`blobs`** *array of objects* 
+
+  This OPTIONAL property contains a list of blob [descriptors](descriptor.md).
+
+- **`refers`** *[descriptor](descriptor.md)*
 
   This OPTIONAL property specifies a [descriptor](descriptor.md) of a container image or another artifact. The purpose of this property is to provide a reference to the container image or artifact this artifact is related to. The "Referrers" API in the distribution specification looks for this property to list all artifacts that refer to a given artifact or container image.
 
@@ -31,7 +35,7 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   The following annotations MAY be used:
 
   - `org.opencontainers.artifact.description`: human readable description for the artifact
-  - `org.opencontainers.artifact.created`: creation time of the artifact
+  - `org.opencontainers.artifact.created`: creation time of the artifact expressed as string defined by [RFC 3339][rfc-3339]
 
   Additionally, the following annotations SHOULD be used when deploying multi-arch container images:
 
@@ -52,6 +56,7 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 {
   "schemaVersion": 2,
   "mediaType": "application/vnd.oci.artifact.manifest.v1+json",
+  "artifactType" "application/example"
   "blobs": [
     {
       "mediaType": "application/vnd.dev.cosign.simplesigning.v1+json",
@@ -70,3 +75,5 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   ]
 }
 ```
+[iana]:         https://www.iana.org/assignments/media-types/media-types.xhtml
+[rfc-3339]:     https://tools.ietf.org/html/rfc3339#section-5.6
