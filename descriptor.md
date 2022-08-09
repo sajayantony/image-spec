@@ -1,11 +1,12 @@
 # OCI Content Descriptors
 
-* An OCI image consists of several different components, arranged in a [Merkle Directed Acyclic Graph (DAG)](https://en.wikipedia.org/wiki/Merkle_tree).
-* References between components in the graph are expressed through _Content Descriptors_.
-* A Content Descriptor (or simply _Descriptor_) describes the disposition of the targeted content.
-* A Content Descriptor includes the type of the content, a content identifier (_digest_), and the byte-size of the raw content. Optionally, it includes the type of artifact it is describing.
-* Descriptors SHOULD be embedded in other formats to securely reference external content.
-* Other formats SHOULD use descriptors to securely reference external content.
+- An OCI image consists of several different components, arranged in a [Merkle Directed Acyclic Graph (DAG)](https://en.wikipedia.org/wiki/Merkle_tree).
+- References between components in the graph are expressed through _Content Descriptors_.
+- A Content Descriptor (or simply _Descriptor_) describes the disposition of the targeted content.
+- A Content Descriptor includes the type of the content, a content identifier (_digest_), and the byte-size of the raw content.
+  Optionally, it includes the type of artifact it is describing.
+- Descriptors SHOULD be embedded in other formats to securely reference external content.
+- Other formats SHOULD use descriptors to securely reference external content.
 
 This section defines the `application/vnd.oci.descriptor.v1+json` [media type](media-types.md).
 
@@ -72,7 +73,7 @@ The _algorithm_ specifies the cryptographic hash function and encoding used for 
 
 A digest string MUST match the following [grammar](considerations.md#ebnf):
 
-```
+```text
 digest                ::= algorithm ":" encoded
 algorithm             ::= algorithm-component (algorithm-separator algorithm-component)*
 algorithm-component   ::= [a-z0-9]+
@@ -108,12 +109,14 @@ Implementations MAY employ [canonicalization](considerations.md#canonicalization
 ### Digest calculations
 
 A _digest_ is calculated by the following pseudo-code, where `H` is the selected hash algorithm, identified by string `<alg>`:
-```
+
+```text
 let ID(C) = Descriptor.digest
 let C = <bytes>
 let D = '<alg>:' + Encode(H(C))
 let verified = ID(C) == D
 ```
+
 Above, we define the content identifier as `ID(C)`, extracted from the `Descriptor.digest` field.
 Content `C` is a string of bytes.
 Function `H` returns the hash of `C` in bytes and is passed to function `Encode` and prefixed with the algorithm to obtain the digest.
@@ -195,6 +198,7 @@ In the following example, the descriptor indicates that the referenced manifest 
 ```
 
 In the following example, the descriptor indicates the type of artifact it is referencing:
+
 ```json,title=Content%20Descriptor&mediatype=application/vnd.oci.descriptor.v1%2Bjson
 {
   "mediaType": "application/vnd.icecream.flavor",
@@ -203,6 +207,7 @@ In the following example, the descriptor indicates the type of artifact it is re
   "artifactType": "icecream_flavor"
 }
 ```
+
 [rfc3986]: https://tools.ietf.org/html/rfc3986
 [rfc4634-s4.1]: https://tools.ietf.org/html/rfc4634#section-4.1
 [rfc4634-s4.2]: https://tools.ietf.org/html/rfc4634#section-4.2
