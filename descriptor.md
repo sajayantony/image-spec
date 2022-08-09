@@ -56,7 +56,13 @@ The following fields contain the primary properties that constitute a Descriptor
   The decoded data MUST be identical to the referenced content and SHOULD be verified against the [`digest`](#digests) and `size` fields by content consumers.
   See [Embedded Content](#embedded-content) for when this is appropriate.
 
+- **`artifactType`** *string*
+  
+  This OPTIONAL property contains the [IANA][iana] mediaType of the object when the descriptor is pointing to an [artifact manifest](artifact.md).
+
 Descriptors pointing to [`application/vnd.oci.image.manifest.v1+json`](manifest.md) SHOULD include the extended field `platform`, see [Image Index Property Descriptions](image-index.md#image-index-property-descriptions) for details.
+
+Descriptors pointing to [`application/vnd.oci.artifact.manifest.v1+json`](artifact.md) SHOULD include the extended field `artifactType`.
 
 ### Reserved
 
@@ -216,3 +222,4 @@ In the following example, the descriptor indicates the type of artifact it is re
 [rfc6838-s4.2]: https://tools.ietf.org/html/rfc6838#section-4.2
 [rfc7230-s2.7]: https://tools.ietf.org/html/rfc7230#section-2.7
 [sha256-vs-sha512]: https://groups.google.com/a/opencontainers.org/forum/#!topic/dev/hsMw7cAwrZE
+[iana]: https://www.iana.org/assignments/media-types/media-types.xhtml

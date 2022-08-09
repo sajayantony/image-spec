@@ -29,9 +29,6 @@ type Descriptor struct {
 	// Size specifies the size in bytes of the blob.
 	Size int64 `json:"size"`
 
-	// ArtifactType is the type of artifact this schema refers to.
-	ArtifactType string `json:"artifactType,omitempty"`
-
 	// URLs specifies a list of URLs from which this object MAY be downloaded
 	URLs []string `json:"urls,omitempty"`
 
@@ -47,6 +44,9 @@ type Descriptor struct {
 	//
 	// This should only be used when referring to a manifest.
 	Platform *Platform `json:"platform,omitempty"`
+
+	// ArtifactType is the IANA media type of this artifact.
+	ArtifactType string `json:"artifactType,omitempty"`
 }
 
 // Platform describes the platform which the image in the manifest runs on.
