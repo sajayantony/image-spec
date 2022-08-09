@@ -15,6 +15,10 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
   This property MUST be used and contain the media type `application/vnd.oci.artifact.manifest.v1+json`.
 
+- **`artifactType`** *string*
+
+  This property SHOULD specify the mediaType of the referenced content and MAY be registered with [IANA][iana].
+
 - **`blobs`** *string*
 
   This OPTIONAL property contains a list of [descriptors](descriptor.md).
@@ -35,7 +39,7 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   The following annotations MAY be used:
 
   - `org.opencontainers.artifact.description`: human readable description for the artifact
-  - `org.opencontainers.artifact.created`: creation time of the artifact
+  - `org.opencontainers.artifact.created`: creation time of the artifact expressed as string defined by [RFC 3339][rfc-3339]
 
   Additionally, the following annotations SHOULD be used when deploying multi-arch container images:
 
@@ -56,6 +60,7 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 {
   "schemaVersion": 2,
   "mediaType": "application/vnd.oci.artifact.manifest.v1+json",
+  "artifactType" "application/example"
   "blobs": [
     {
       "mediaType": "application/vnd.icecream.flavor",
@@ -74,3 +79,6 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   ]
 }
 ```
+
+[iana]:         https://www.iana.org/assignments/media-types/media-types.xhtml
+[rfc-3339]:     https://tools.ietf.org/html/rfc3339#section-5.6
