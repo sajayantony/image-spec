@@ -197,7 +197,7 @@ In the following example, the descriptor indicates that the referenced manifest 
 In the following example, the descriptor indicates the type of artifact it is referencing:
 ```json,title=Content%20Descriptor&mediatype=application/vnd.oci.descriptor.v1%2Bjson
 {
-  "mediaType": "application/vnd.icecream.flavor.v1+json",
+  "mediaType": "application/vnd.icecream.flavor",
   "size": 123,
   "digest": "sha256:87923725d74f4bfb94c9e86d64170f7521aad8221a5de834851470ca142da630",
   "artifactType": "icecream_flavor"
