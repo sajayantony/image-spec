@@ -17,11 +17,15 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
 - **`blobs`** *string*
 
-  This OPTIONAL property contains a list of [descriptors](descriptor.md). Each descriptor represents an artifact of any IANA mediaType. The list MAY be ordered for certain artifact types like scan results.
+  This OPTIONAL property contains a list of [descriptors](descriptor.md).
+  Each descriptor represents an artifact of any IANA mediaType.
+  The list MAY be ordered for certain artifact types like scan results.
 
 - **`refers`** *string*
 
-  This OPTIONAL property specifies a [descriptor](descriptor.md) of a container image or another artifact. The purpose of this property is to provide a reference to the container image or artifact this artifact is related to. The "Referrers" API in the distribution specification looks for this property to list all artifacts that refer to a given artifact or container image.
+  This OPTIONAL property specifies a [descriptor](descriptor.md) of a container image or another artifact.
+  The purpose of this property is to provide a reference to the container image or artifact this artifact is related to.
+  The "Referrers" API in the distribution specification looks for this property to list all artifacts that refer to a given artifact or container image.
 
 - **`annotations`** *string-string map*
 
