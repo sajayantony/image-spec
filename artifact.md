@@ -46,7 +46,7 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
 ## Examples
 
-*Example showing an artifact manifest for an image signature:*
+*Example showing an artifact manifest for an ice cream flavor referencing an ice cream:*
 
 ```jsonc,title=Manifest&mediatype=application/vnd.oci.artifact.manifest.v1%2Bjson
 {
@@ -54,18 +54,18 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   "mediaType": "application/vnd.oci.artifact.manifest.v1+json",
   "blobs": [
     {
-      "mediaType": "application/vnd.dev.cosign.simplesigning.v1+json",
-      "size": 210,
-      "digest": "sha256:1119abab63e605dcc281019bad0424744178b6f61ba57378701fe7391994c999"
+      "mediaType": "application/vnd.icecream.flavor",
+      "size": 123,
+      "digest": "sha256:87923725d74f4bfb94c9e86d64170f7521aad8221a5de834851470ca142da630"
     }
   ],
   "refers": {
-    "mediaType": "application/vnd.oci.image.manifest.v1+json",
-    "size": 7682,
-    "digest": "sha256:5b0bcabd1ed22e9fb1310cf6c2dec7cdef19f0ad69efa1f392e94a4333501270"
+    "mediaType": "application/vnd.icecream",
+    "size": 1234,
+    "digest": "sha256:cc06a2839488b8bd2a2b99dcdc03d5cfd818eed72ad08ef3cc197aac64c0d0a0"
   },
   "annotations": [
-    "org.opencontainers.artifact.description": "cosign signature for image:tag",
+    "org.opencontainers.artifact.description": "vanilla surprise",
     "org.opencontainers.artifact.created": "2022-04-05T14:30Z"
   ]
 }
