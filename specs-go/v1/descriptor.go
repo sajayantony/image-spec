@@ -1,4 +1,4 @@
-// Copyright 2016 The Linux Foundation
+// Copyright 2016-2022 The Linux Foundation
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,6 +28,9 @@ type Descriptor struct {
 
 	// Size specifies the size in bytes of the blob.
 	Size int64 `json:"size"`
+
+	// ArtifactType is the type of artifact this schema refers to.
+	ArtifactType string `json:"artifactType,omitempty"`
 
 	// URLs specifies a list of URLs from which this object MAY be downloaded
 	URLs []string `json:"urls,omitempty"`
