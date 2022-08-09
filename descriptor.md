@@ -3,7 +3,7 @@
 * An OCI image consists of several different components, arranged in a [Merkle Directed Acyclic Graph (DAG)](https://en.wikipedia.org/wiki/Merkle_tree).
 * References between components in the graph are expressed through _Content Descriptors_.
 * A Content Descriptor (or simply _Descriptor_) describes the disposition of the targeted content.
-* A Content Descriptor includes the type of the content, a content identifier (_digest_), and the byte-size of the raw content.
+* A Content Descriptor includes the type of the content, a content identifier (_digest_), and the byte-size of the raw content. Optionally, it includes the type of artifact it is describing.
 * Descriptors SHOULD be embedded in other formats to securely reference external content.
 * Other formats SHOULD use descriptors to securely reference external content.
 
@@ -21,6 +21,10 @@ The following fields contain the primary properties that constitute a Descriptor
   Values MUST comply with [RFC 6838][rfc6838], including the [naming requirements in its section 4.2][rfc6838-s4.2].
 
   The OCI image specification defines [several of its own MIME types](media-types.md) for resources defined in the specification.
+
+- **`artifactType`** *string*
+  This OPTIONAL property contains the artifact type of the referenced content.
+  The value of this property MUST be the [IANA media type](https://www.iana.org/assignments/media-types/media-types.xhtml) of the artifact.
 
 - **`digest`** *string*
 
@@ -190,6 +194,15 @@ In the following example, the descriptor indicates that the referenced manifest 
 }
 ```
 
+In the following example, the descriptor indicates the type of artifact it is referencing:
+```json,title=Content%20Descriptor&mediatype=application/vnd.oci.descriptor.v1%2Bjson
+{
+  "mediaType": "application/vnd.icecream.flavor.v1+json",
+  "size": 123,
+  "digest": "sha256:87923725d74f4bfb94c9e86d64170f7521aad8221a5de834851470ca142da630",
+  "artifactType": "icecream_flavor"
+}
+```
 [rfc3986]: https://tools.ietf.org/html/rfc3986
 [rfc4634-s4.1]: https://tools.ietf.org/html/rfc4634#section-4.1
 [rfc4634-s4.2]: https://tools.ietf.org/html/rfc4634#section-4.2
