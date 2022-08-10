@@ -21,6 +21,10 @@
         "$ref": "content-descriptor.json"
       }
     },
+    "refers": {
+      "description": "This field specifies the descriptor to which this object refers to",
+      "$ref": "content-descriptor.json"
+    },
     "annotations": {
       "id": "https://opencontainers.org/schema/image/manifest/annotations",
       "$ref": "defs-descriptor.json#/definitions/annotations"
