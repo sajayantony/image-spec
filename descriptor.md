@@ -23,10 +23,6 @@ The following fields contain the primary properties that constitute a Descriptor
 
   The OCI image specification defines [several of its own MIME types](media-types.md) for resources defined in the specification.
 
-- **`artifactType`** *string*
-  This OPTIONAL property contains the artifact type of the referenced content.
-  The value of this property MUST be the [IANA media type](https://www.iana.org/assignments/media-types/media-types.xhtml) of the artifact.
-
 - **`digest`** *string*
 
   This REQUIRED property is the _digest_ of the targeted content, conforming to the requirements outlined in [Digests](#digests).
