@@ -53,8 +53,10 @@ The following fields contain the primary properties that constitute a Descriptor
   See [Embedded Content](#embedded-content) for when this is appropriate.
 
 - **`artifactType`** *string*
-  
-  This OPTIONAL property contains the [IANA][iana] mediaType of the object when the descriptor is pointing to an [artifact manifest](artifact.md).
+
+  This OPTIONAL property contains the type of an artifact when the descriptor points to an artifact.
+  This is the value of `artifactType` when the descriptor references an [artifact manifest](artifact.md).
+  This is the value of the config descriptor `mediaType` when the descriptor references an [image manifest](manifest.md).
 
 Descriptors pointing to [`application/vnd.oci.image.manifest.v1+json`](manifest.md) SHOULD include the extended field `platform`, see [Image Index Property Descriptions](image-index.md#image-index-property-descriptions) for details.
 

@@ -35,6 +35,7 @@ For the media type(s) that this document is compatible with, see the [matrix][ma
     Implementations MUST support at least the following media types:
 
     - [`application/vnd.oci.image.manifest.v1+json`](manifest.md)
+    - [`application/vnd.oci.artifact.manifest.v1+json`](artifact.md)
 
     Also, implementations SHOULD support the following media types:
 

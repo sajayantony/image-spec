@@ -17,7 +17,8 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
 - **`artifactType`** *string*
 
-  This property SHOULD specify the mediaType of the referenced content and MAY be registered with [IANA][iana].
+  This property SHOULD be used and contain the mediaType of the referenced artifact.
+  If defined, the value MUST comply with [RFC 6838][rfc6838], including the [naming requirements in its section 4.2][rfc6838-s4.2], and MAY be registered with [IANA][iana].
 
 - **`blobs`** *string*
 
@@ -27,58 +28,46 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
 - **`refers`** *string*
 
-  This OPTIONAL property specifies a [descriptor](descriptor.md) of a container image or another artifact.
-  The purpose of this property is to provide a reference to the container image or artifact this artifact is related to.
-  The "Referrers" API in the distribution specification looks for this property to list all artifacts that refer to a given artifact or container image.
+  This OPTIONAL property specifies a [descriptor](descriptor.md) of another manifest.
+  This value, used by the [`referrers` API](https://github.com/opencontainers/distribution-spec/blob/main/spec.md#listing-referrers), indicates a relationship to the specified manifest.
 
 - **`annotations`** *string-string map*
 
   This OPTIONAL property contains additional metadata for the artifact manifest.
   This OPTIONAL property MUST use the [annotation rules](annotations.md#rules).
 
-  The following annotations MAY be used:
+  See [Pre-Defined Annotation Keys](annotations.md#pre-defined-annotation-keys).
 
-  - `org.opencontainers.artifact.description`: human readable description for the artifact
-  - `org.opencontainers.artifact.created`: creation time of the artifact expressed as string defined by [RFC 3339][rfc-3339]
-
-  Additionally, the following annotations SHOULD be used when deploying multi-arch container images:
-
-  - `org.opencontainers.platform.architecture`: CPU architecture for binaries
-  - `org.opencontainers.platform.os`: operating system for binaries
-  - `org.opencontainers.platform.os.version`: operating system version for binaries
-  - `org.opencontainers.platform.variant`: variant of the CPU architecture for binaries
-
-    Also, see [Pre-Defined Annotation Keys](annotations.md#pre-defined-annotation-keys).
-
-  User defined annotations MAY be used to filter various artifact types, e.g. signature public key hash, attestation type, and SBOM schema.
+  Annotations MAY be used to filter the response from the [`referrers` API](https://github.com/opencontainers/distribution-spec/blob/main/spec.md#listing-referrers).
 
 ## Examples
 
-*Example showing an artifact manifest for an ice cream flavor referencing an ice cream:*
+*Example showing an artifact manifest for an example SBOM referencing an image:*
 
 ```jsonc,title=Manifest&mediatype=application/vnd.oci.artifact.manifest.v1%2Bjson
 {
   "schemaVersion": 2,
   "mediaType": "application/vnd.oci.artifact.manifest.v1+json",
-  "artifactType" "application/example"
+  "artifactType": "application/vnd.example.sbom.v1"
   "blobs": [
     {
-      "mediaType": "application/vnd.icecream.flavor",
+      "mediaType": "application/gzip",
       "size": 123,
       "digest": "sha256:87923725d74f4bfb94c9e86d64170f7521aad8221a5de834851470ca142da630"
     }
   ],
   "refers": {
-    "mediaType": "application/vnd.icecream",
+    "mediaType": "application/vnd.oci.image.manifest.v1+json",
     "size": 1234,
     "digest": "sha256:cc06a2839488b8bd2a2b99dcdc03d5cfd818eed72ad08ef3cc197aac64c0d0a0"
   },
-  "annotations": [
-    "org.opencontainers.artifact.description": "vanilla surprise",
-    "org.opencontainers.artifact.created": "2022-04-05T14:30Z"
-  ]
+  "annotations": {
+    "org.opencontainers.artifact.created": "2022-01-01T14:42:55Z",
+    "org.example.sbom.format": "json"
+  }
 }
 ```
 
 [iana]:         https://www.iana.org/assignments/media-types/media-types.xhtml
-[rfc-3339]:     https://tools.ietf.org/html/rfc3339#section-5.6
+[rfc6838]:      https://tools.ietf.org/html/rfc6838
+[rfc6838-s4.2]: https://tools.ietf.org/html/rfc6838#section-4.2

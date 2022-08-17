@@ -67,8 +67,8 @@ Unlike the [image index](image-index.md), which contains information about a set
 
 - **`refers`** *[descriptor](descriptor.md)*
 
-    This OPTIONAL property specifies a [descriptor](descriptor.md) of another image or [artifact](artifact.md).
-    Clients may use this property to take advantage of the [`referrers` API](https://github.com/oci-playground/distribution-spec/blob/pr/spec.md#endpoints), to encode a reference to a related image or artifact.
+    This OPTIONAL property specifies a [descriptor](descriptor.md) of another manifest.
+    This value, used by the [`referrers` API](https://github.com/opencontainers/distribution-spec/blob/main/spec.md#listing-referrers), indicates a relationship to the specified manifest.
 
 - **`annotations`** *string-string map*
 
