@@ -46,7 +46,6 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
 
 ```jsonc,title=Manifest&mediatype=application/vnd.oci.artifact.manifest.v1%2Bjson
 {
-  "schemaVersion": 2,
   "mediaType": "application/vnd.oci.artifact.manifest.v1+json",
   "artifactType": "application/vnd.example.sbom.v1"
   "blobs": [
