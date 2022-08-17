@@ -20,13 +20,13 @@ For the media type(s) that this is compatible with see the [matrix](media-types.
   This property SHOULD be used and contain the mediaType of the referenced artifact.
   If defined, the value MUST comply with [RFC 6838][rfc6838], including the [naming requirements in its section 4.2][rfc6838-s4.2], and MAY be registered with [IANA][iana].
 
-- **`blobs`** *string*
+- **`blobs`** *array of objects*
 
-  This OPTIONAL property contains a list of [descriptors](descriptor.md).
+  This OPTIONAL property is an array of objects and each item in the array MUST be a [descriptor](descriptor.md).
   Each descriptor represents an artifact of any IANA mediaType.
   The list MAY be ordered for certain artifact types like scan results.
 
-- **`refers`** *string*
+- **`refers`** *[descriptor](descriptor.md)*
 
   This OPTIONAL property specifies a [descriptor](descriptor.md) of another manifest.
   This value, used by the [`referrers` API](https://github.com/opencontainers/distribution-spec/blob/main/spec.md#listing-referrers), indicates a relationship to the specified manifest.
