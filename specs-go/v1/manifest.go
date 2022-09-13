@@ -30,7 +30,7 @@ type Manifest struct {
 	// Layers is an indexed list of layers referenced by the manifest.
 	Layers []Descriptor `json:"layers"`
 
-	// Subject is an optional link to a manifest.
+	// Subject is an optional link from the image manifest to another manifest forming an association between the image manifest and the other manifest.
 	Subject *Descriptor `json:"subject,omitempty"`
 
 	// Annotations contains arbitrary metadata for the image manifest.
